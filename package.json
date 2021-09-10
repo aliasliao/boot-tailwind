@@ -1,0 +1,10 @@
+{
+  "name": "boot-tailwind",
+  "packageManager": "yarn@3.0.2",
+  "scripts": {
+    "build": "lessc src/main.less dist/main.css"
+  },
+  "devDependencies": {
+    "less": "^4.1.1"
+  }
+}

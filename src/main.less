@@ -1,0 +1,36 @@
+@npx: 2, 4, 8, 12, 16, 20;
+@type: p, pt, pb, pl, pr, m, mt, mb, ml, mr;
+
+each(@npx, .(@n) {
+  each(@type, .(@t) {
+    .@{t}-@{n} {
+      padding: @n * 1px;
+    }
+  })
+});
+
+.block {
+  display: block;
+}
+.inline {
+  display: inline;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}

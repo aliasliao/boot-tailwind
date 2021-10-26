@@ -27,8 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
     - run: npm install -g yarn
-    - run: pwd
-    - run: ls -alh
     - run: yarn set version berry
+    - run: yarn install
     - run: yarn build
     - run: cat dist/main.css

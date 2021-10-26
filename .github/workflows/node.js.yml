@@ -28,7 +28,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-      run: npm install -g yarn
+    - run: npm install -g yarn
 
     - name: Build
       run: yarn && yarn build && echo ${{ github.sha }} > dist/Release.txt && ls -alh dist

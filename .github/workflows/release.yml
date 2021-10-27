@@ -34,7 +34,7 @@ jobs:
 
     - name: Release
       uses: softprops/action-gh-release@v1
-      if: github.event_name != 'push'
+      if: github.event_name == 'release'
       with:
         files: |
           dist/main.css

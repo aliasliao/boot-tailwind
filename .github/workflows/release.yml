@@ -5,9 +5,8 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  release:
+    type: created
 
 jobs:
   build:
@@ -35,8 +34,9 @@ jobs:
 
     - name: Release
       uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
+      if: github.event_name == 'release'
       with:
         files: |
           dist/main.css
           dist/Release.txt
+        tag_name: ${{ github.event.release.tag_name }}

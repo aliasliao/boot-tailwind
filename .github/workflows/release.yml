@@ -20,9 +20,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Detect package version
-      uses: salsify/action-detect-and-tag-new-version@v2
-      id: version-detect
+#    - name: Detect package version
+#      uses: salsify/action-detect-and-tag-new-version@v2
+#      id: version-detect
 
     - name: Setup node
       uses: actions/setup-node@v2

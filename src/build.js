@@ -1,18 +1,21 @@
-/**
- * @param {string} src
- * */
 const fs = require('fs')
 
+/**
+ * @param {string} src
+ * @return {string}
+ * */
 function minify(src) {
   return src
     // handle tailwind functions
     .replaceAll(/theme\([^,]*,\s?([^)]+)\)/g, (_, p) => p)
     // handle comments
     .replaceAll(/\/\*[\s\S]*?\*\//g, '')
-    // handle new line
-    .replaceAll(/[\r\n\s]/g, ' ')
-    // handle continue space
-    .replaceAll(/\s{2,}/g, ' ')
+    // handle tailing space
+    .replaceAll(/[ ]+\n/g, '\n')
+    // handle consecutive new line
+    .replaceAll(/[\r\n]{2,}/g, '\n')
+    // handle starting new line
+    .replaceAll(/^[\r\n]*/g, '')
 }
 
 const file = process.argv[process.argv.length - 1]

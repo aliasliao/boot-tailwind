@@ -5,8 +5,6 @@ name: Build and Release
 
 on:
   push:
-  release:
-    type: created
 
 jobs:
   build:
@@ -19,24 +17,34 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Check package version
+      uses: MontyD/package-json-updated-action
+      id: version-updated
+
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup Node and Yarn
+    - name: Setup node
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Setup yarn
     - run: npm install -g yarn
 
     - name: Build
-      run: yarn && yarn build && echo ${{ github.sha }} > dist/Release.txt && ls -alh dist
+      run: yarn && yarn build && ls -alh dist
 
-    - name: Release
+    - name: Triger release with package.json
       uses: softprops/action-gh-release@v1
-      if: github.event_name == 'release'
+      if: steps.version-updated.outputs.has-updated
       with:
-        files: |
-          dist/main.css
-          dist/Release.txt
-        tag_name: ${{ github.event.release.tag_name }}
+        files: dist/main.css
+        tag_name: ${{ steps.version-updated.outputs.current-package-version }}
+
+    - name: Publish with package.json
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

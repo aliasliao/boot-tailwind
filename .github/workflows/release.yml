@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - name: Check package version
-      uses: MontyD/package-json-updated-action
+      uses: MontyD/package-json-updated-action@v1
       id: version-updated
 
     - name: Checkout

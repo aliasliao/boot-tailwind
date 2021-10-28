@@ -17,12 +17,12 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: Check package version
-      uses: MontyD/package-json-updated-action@v1
-      id: version-updated
-
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Detect package version
+      uses: salsify/action-detect-and-tag-new-version@v2
+      id: version-detect
 
     - name: Setup node
       uses: actions/setup-node@v2
@@ -35,14 +35,19 @@ jobs:
     - run: npm install -g yarn
 
     - name: Build
-      run: yarn && yarn build && ls -alh dist
+      run: |
+        echo previous-version: ${{ steps.version-updated.outputs.previous-version }}
+        echo current-version : ${{ steps.version-updated.outputs.current-version }}
+        yarn
+        yarn build
+        ls -alh dist
 
     - name: Triger release with package.json
       uses: softprops/action-gh-release@v1
-      if: steps.version-updated.outputs.has-updated
+      if: steps.version-updated.outputs.previous-version < steps.version-detect.outputs.current-version
       with:
         files: dist/main.css
-        tag_name: ${{ steps.version-updated.outputs.current-package-version }}
+        tag_name: ${{ steps.version-detect.outputs.current-version }}
 
     - name: Publish with package.json
       run: npm publish --access public

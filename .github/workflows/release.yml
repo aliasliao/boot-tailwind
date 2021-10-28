@@ -20,6 +20,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Detect package version
+      uses: salsify/action-detect-and-tag-new-version@v2
+      id: version-detect
+
     - name: Setup node
       uses: actions/setup-node@v2
       with:
@@ -28,7 +32,7 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
 
     - name: Setup yarn
-    - run: npm install -g yarn
+      run: npm install -g yarn
 
     - name: Build
       run: |

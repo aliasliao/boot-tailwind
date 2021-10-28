@@ -38,8 +38,8 @@ jobs:
 
     - name: Build
       run: |
-        echo previous-version: ${{ steps.version-updated.outputs.previous-version }}
-        echo current-version : ${{ steps.version-updated.outputs.current-version }}
+        echo "previous-version: ${{ steps.version-updated.outputs.previous-version }}"
+        echo "current-version : ${{ steps.version-updated.outputs.current-version }}"
         yarn
         yarn build
         ls -alh dist
@@ -53,5 +53,6 @@ jobs:
 
     - name: Publish with package.json
       run: npm publish --access public
+      if: steps.version-updated.outputs.previous-version < steps.version-detect.outputs.current-version
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

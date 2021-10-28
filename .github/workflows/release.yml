@@ -38,21 +38,21 @@ jobs:
 
     - name: Build
       run: |
-        echo "previous-version: ${{ steps.version-updated.outputs.previous-version }}"
-        echo "current-version : ${{ steps.version-updated.outputs.current-version }}"
+        echo "previous-version: ${{ steps.version-detect.outputs.previous-version }}"
+        echo "current-version : ${{ steps.version-detect.outputs.current-version }}"
         yarn
         yarn build
         ls -alh dist
 
     - name: Triger release with package.json
       uses: softprops/action-gh-release@v1
-      if: steps.version-updated.outputs.previous-version < steps.version-detect.outputs.current-version
+      if: steps.version-detect.outputs.previous-version < steps.version-detect.outputs.current-version
       with:
         files: dist/main.css
         tag_name: ${{ steps.version-detect.outputs.current-version }}
 
     - name: Publish with package.json
       run: npm publish --access public
-      if: steps.version-updated.outputs.previous-version < steps.version-detect.outputs.current-version
+      if: steps.version-detect.outputs.previous-version < steps.version-detect.outputs.current-version
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

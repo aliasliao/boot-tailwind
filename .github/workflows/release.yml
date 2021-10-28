@@ -44,14 +44,14 @@ jobs:
         yarn build
         ls -alh dist
 
-    - name: Triger release with package.json
+    - name: Release to Github
       uses: softprops/action-gh-release@v1
       if: steps.version-detect.outputs.previous-version < steps.version-detect.outputs.current-version
       with:
         files: dist/main.css
         tag_name: ${{ steps.version-detect.outputs.current-version }}
 
-    - name: Publish with package.json
+    - name: Release to NPM
       run: npm publish --access public
       if: steps.version-detect.outputs.previous-version < steps.version-detect.outputs.current-version
       env:

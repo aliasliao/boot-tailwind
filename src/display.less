@@ -1,0 +1,8 @@
+@display_types: block, inline, flex, inline-flex, grid;
+
+each(@display_types, .(@type) {
+  .@{type} {
+    display: @type;
+  }
+});
+

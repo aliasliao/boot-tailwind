@@ -1,6 +1,6 @@
 {
   "name": "boot-tailwind",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "packageManager": "yarn@3.0.2",
   "scripts": {
     "build": "lessc src/main.less dist/main.css && node src/build.js dist/main.css"

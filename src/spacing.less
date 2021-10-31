@@ -1,0 +1,10 @@
+@spacing_sizes: 2, 4, 8, 12, 16, 24, 48;
+
+each(@spacing_sizes, .(@size) {
+  .space-x-@{size} > * + * {
+    margin-left: @size * 1px;
+  }
+  .space-y-@{size} > * + * {
+    margin-top: @size * 1px;
+  }
+})

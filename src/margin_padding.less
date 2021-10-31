@@ -1,0 +1,32 @@
+@margin_types: t, b, l, r, x, y;
+@margin_sizes: 2, 4, 8, 12, 16, 24, 48;
+@t: top;
+@b: bottom;
+@l: left;
+@r: right;
+@x: left, right;
+@y: top, bottom;
+
+each(@margin_types, .(@type) {
+  each(@margin_sizes, .(@size) {
+    .m@{type}-@{size} {
+      each(@@type, .(@pos) {
+        margin-@{pos}: @size * 1px;
+      });
+    }
+    .p@{type}-@{size} {
+      each(@@type, .(@pos) {
+        padding-@{pos}: @size * 1px;
+      });
+    }
+  });
+});
+
+each(@margin_sizes, .(@size) {
+  .m-@{size} {
+    margin: @size * 1px;
+  }
+  .p-@{size} {
+    padding: @size * 1px;
+  }
+});

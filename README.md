@@ -11,12 +11,12 @@
 #### Import from jsDelivr
 raw version:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boot-tailwind@0.2.3/dist/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boot-tailwind/dist/main.css">
 ```
 
 minified version:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boot-tailwind@0.2.3/dist/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boot-tailwind/dist/main.min.css">
 ```
 
 #### Download from github release
